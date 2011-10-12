@@ -17,50 +17,63 @@ Image
 
 $(document).ready(function(){
 	
-	var total=2500;// total length of all images side by side 
-	var imageLeft=$('img').css('left'); //stores the left point of the image
-	var point=parseInt(imageLeft, 10); //changes the css left string to a numeric value 
-
+	var positiveTotal=2500;// the max length of all images side by side 
+	var negativeTotal=-2500; // the max negative length of all images side by side
+	var animating = false; // false until animation begins
+	
+		
 	//initially start with left button removed 
 	$('#button-left').css('display', 'none');
-
-	//remove left button at end point
-	function removeLeft() { 
+	
+		
+	$('#button-left').click(function() { //left button
+		var moveImageRight=$('img').css('left') //stores the left point of the image
+		var position=parseInt(moveImageRight, 10); //changes the css left string to a numeric value
+		var newPosition = position+500;
+	
+		if (animating) { 
+			return;
+		}
+		
+		if (newPosition<positiveTotal){ //point is greater than 0 or equal to total (2500)
+	 		animating=true;
+	 		$('img').animate({left: newPosition}, 1000, function() { 
+	 			animating = false;
+	 		});	
+  		}  
+		
 		$('#button-right').css('display', 'block');
 		
-		if (point===0) {
+		if (newPosition===0) {
 			$('#button-left').css('display', 'none');	
 		}
-	}
-	
-	//remove right button at end point
-	function removeRight() { 
-		$('#button-left').css('display', 'block');
-		
-		if (point===total-1) {
-			$('#button-right').css('display', 'none');
-				
-		}
-	}
-	
-	$('#button-left').click(function() { //left button
-		
-		if (point>=total){ //point is greater than 0 or equal to total (2500)
-	 		$('img').animate({left: '500'}, 5000);	
-  		} 
-		 
-		removeLeft();
 	});			
+
 		
 	$('#button-right').click(function() { //right button
 		
-		if (point<=total){ //point is less than or equal to the total (2500)
-	 		$('img').animate({left: '-500'}, 5000);	
-	 			
+		var moveImageLeft=$('img').css('left'); //stores the left point of the image
+		var position=parseInt(moveImageLeft, 10); //changes the css left string to a numeric value
+		var newPosition = position-500;
+		
+		if (animating) { 
+			return;
 		}
 		
-		removeRight();
-
+		if (newPosition>negativeTotal) { 
+			animating=true;
+			$('img').animate({left: newPosition}, 1000, function() { 
+				animating = false;
+			});
+		}
+		
+		$('#button-left').css('display', 'block');
+		
+		if (newPosition===negativeTotal) {
+			$('#button-right').css('display', 'none');
+		}
+		
+		
 	});
 	
 	
