@@ -1,84 +1,71 @@
-/************************
-
-BASIC SLIDER
-
-Image
-
-//Put all images in a row on page 
-//Have a window that allows you to see one of those images at a time
-//Have one div and then add up the amount of images to get a number of the full length 
-//Slide to each of the beggings of the image 
-
-
- 
-
-***********************/
-
+//Next:
+//make so only one image displays
+//make so I can use keyboard 
 
 $(document).ready(function(){
 	
 	var positiveTotal=2500;// the max length of all images side by side 
 	var negativeTotal=-2500; // the max negative length of all images side by side
-	var animating = false; // false until animation begins
+	var animating = false; // begin false (animating either enables or disables an animation when a button is clicked)
 	
 		
 	//initially start with left button removed 
 	$('#button-left').css('display', 'none');
 	
-		
-	$('#button-left').click(function() { //left button
+	//left button event
+	$('#button-left').click(function() { 
 		var moveImageRight=$('img').css('left') //stores the left point of the image
 		var position=parseInt(moveImageRight, 10); //changes the css left string to a numeric value
-		var newPosition = position+500;
+		var newPosition = position+500; //take value stored in position and add 500 then store in newPosition
 	
-		if (animating) { 
+		if (animating) { //if animating var is true exit the function
 			return;
 		}
 		
-		if (newPosition<positiveTotal){ //point is greater than 0 or equal to total (2500)
-	 		animating=true;
-	 		$('img').animate({left: newPosition}, 1000, function() { 
-	 			animating = false;
+		if (newPosition<positiveTotal){ //if the number in new position is less than positiveTotal (2500) 
+	 		animating=true; //change animating to true
+	 		$('img').animate({left: newPosition}, 1000, function() { //move the image 
+	 			animating = false; // when finished image animation change animating var to false
 	 		});	
   		}  
 		
-		$('#button-right').css('display', 'block');
+		$('#button-right').css('display', 'block'); //display the right button when left button is clicked
 		
-		if (newPosition===0) {
-			$('#button-left').css('display', 'none');	
+		if (newPosition===0) { //if the newPosition is at 0 remove the left button from the page
+			$('#button-left').css('display', 'none'); 	
 		}
+		
+		console.log(newPosition);
 	});			
 
-		
-	$('#button-right').click(function() { //right button
+	//right button event	
+	$('#button-right').click(function() { 
 		
 		var moveImageLeft=$('img').css('left'); //stores the left point of the image
 		var position=parseInt(moveImageLeft, 10); //changes the css left string to a numeric value
-		var newPosition = position-500;
+		var newPosition = position-500; //take value stored in position and minus 500 then store in newPosition
 		
-		if (animating) { 
+		if (animating) { //if animating var is true exit the function
 			return;
 		}
 		
-		if (newPosition>negativeTotal) { 
-			animating=true;
-			$('img').animate({left: newPosition}, 1000, function() { 
-				animating = false;
+		if (newPosition>negativeTotal) { //if the number in new position is greated than negativeTotal (-2500) 
+			animating=true; //change animating to true
+			$('img').animate({left: newPosition}, 1000, function() { //move the image
+				animating = false; // when finished image animation change animating var to false
 			});
 		}
 		
-		$('#button-left').css('display', 'block');
+		$('#button-left').css('display', 'block'); //display the left button when right button is clicked
 		
-		if (newPosition===negativeTotal) {
+		if (newPosition===negativeTotal) { //if the newPosition is at negativeTotal (-2500) remove the right button from the page
 			$('#button-right').css('display', 'none');
 		}
 		
-		
+		console.log(newPosition);
 	});
 	
 	
 });
-// Question: How can i use the off set to tell me the point that I am at? 
-//where is it? 
-//where it is plus 500
+
 
