@@ -1,3 +1,5 @@
+/**************************** button ****************************/
+
 button { 
 	font-family: Arial; 
 	size: 12px; 
@@ -8,17 +10,27 @@ button {
 	
 }
 
-/**************************** boxes ****************************/
+/**************************** slider ****************************/
 
-div { 
-	width: 2500px; 
-	height: 300px;
-	position: absolute;
-	overflow: hidden; 
+div {
+    border: 1px solid black;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    top: 32px;
+    width: 500px;
 }
 
-img { 
-	left: 0;
+ul { 
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 2500px;
+}
+
+li { 
+	list-style-type: none;
 	position: relative;
-	z-index: 1;
+	float: left;
+	left: 0;
 }

@@ -14,7 +14,7 @@ $(document).ready(function(){
 	
 	//left button event
 	$('#button-left').click(function() { 
-		var moveImageRight=$('img').css('left') //stores the left point of the image
+		var moveImageRight=$('li').css('left') //stores the left point of the image
 		var position=parseInt(moveImageRight, 10); //changes the css left string to a numeric value
 		var newPosition = position+500; //take value stored in position and add 500 then store in newPosition
 	
@@ -24,7 +24,7 @@ $(document).ready(function(){
 		
 		if (newPosition<positiveTotal){ //if the number in new position is less than positiveTotal (2500) 
 	 		animating=true; //change animating to true
-	 		$('img').animate({left: newPosition}, 1000, function() { //move the image 
+	 		$('li').animate({left: newPosition}, 1000, function() { //move the image 
 	 			animating = false; // when finished image animation change animating var to false
 	 		});	
   		}  
@@ -41,7 +41,7 @@ $(document).ready(function(){
 	//right button event	
 	$('#button-right').click(function() { 
 		
-		var moveImageLeft=$('img').css('left'); //stores the left point of the image
+		var moveImageLeft=$('li').css('left'); //stores the left point of the image
 		var position=parseInt(moveImageLeft, 10); //changes the css left string to a numeric value
 		var newPosition = position-500; //take value stored in position and minus 500 then store in newPosition
 		
@@ -51,14 +51,14 @@ $(document).ready(function(){
 		
 		if (newPosition>negativeTotal) { //if the number in new position is greated than negativeTotal (-2500) 
 			animating=true; //change animating to true
-			$('img').animate({left: newPosition}, 1000, function() { //move the image
+			$('li').animate({left: newPosition}, 1000, function() { //move the image
 				animating = false; // when finished image animation change animating var to false
 			});
 		}
 		
 		$('#button-left').css('display', 'block'); //display the left button when right button is clicked
 		
-		if (newPosition===negativeTotal) { //if the newPosition is at negativeTotal (-2500) remove the right button from the page
+		if (newPosition===negativeTotal+500) { //if the newPosition is at negativeTotal+500 (-2000) remove the right button from the page
 			$('#button-right').css('display', 'none');
 		}
 		
